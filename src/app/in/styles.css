@@ -1,0 +1,6 @@
+.main_bg{
+
+    background-image: url("/assets/image/Netflix_bg1.jpg");
+    background-repeat: no-repeat, no-repeat;
+    background-size:cover;  
+}
