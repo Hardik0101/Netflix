@@ -6,10 +6,10 @@ import {
   CalendarDays,
   Clapperboard,
   Globe,
-  Film,
   MonitorPlay,
+  Info,
 } from "lucide-react";
-import { getMoviesTrailers } from "@/api/ApiFetch";
+import { fetchMovieTrailers } from "@/api/ApiFetch";
 import { Button } from "../ui/button";
 
 const SingleImage = ({ item, onClick }) => {
@@ -19,7 +19,7 @@ const SingleImage = ({ item, onClick }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const popularData = await getMoviesTrailers(item.id);
+        const popularData = await fetchMovieTrailers(item.id);
         const officialTrailer = popularData.results.find(
           (trailer) =>
             trailer.name.includes("Trailer") && trailer.type === "Trailer"
@@ -71,7 +71,7 @@ const SingleImage = ({ item, onClick }) => {
                 className="max-sm:w-[18px] max-md:w-[20px]"
               />
               <p className="text-sm max-sm:text-[12px] max-md:text-[12px]">
-                {item.vote_average} / 10
+                {item.vote_average.toFixed(1)} / 10
               </p>
             </div>
             <div className="flex flex-row items-center gap-x-1 mt-2  max-sm:mt-0 max-md:mt-0">
@@ -84,7 +84,7 @@ const SingleImage = ({ item, onClick }) => {
               </p>
             </div>
             <p className="mt-2  max-sm:mt-0 max-md:mt-0 p-[2px] rounded bg-gray-300 w-fit max-sm:text-[12px] max-md:text-[12px]">
-              U/A {item.adult ? "18+" : "13+"}
+              U/A {item.adult === true ? "18+" : "13+"}
             </p>
           </div>
         </div>
@@ -100,8 +100,11 @@ const SingleImage = ({ item, onClick }) => {
           <Button
             variant="outline"
             className="gap-x-1 bg-gray-400 hover:bg-gray-300"
+            onClick={() => {
+              router.push(`/details/${item.id}`);
+            }}
           >
-            <Film strokeWidth={2} /> Watch Movie
+            <Info /> See More Details
           </Button>
           <Button
             className="gap-x-1 bg-[#e50914] hover:bg-red-700"

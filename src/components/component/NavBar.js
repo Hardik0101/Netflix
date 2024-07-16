@@ -39,6 +39,7 @@ import {
 } from "@/components/ui/sheet";
 import { Label } from "../ui/label";
 import { HiMenu } from "react-icons/hi";
+import { CircleX } from "lucide-react";
 
 function NavBar({ searchText, setSearchText }) {
   const router = useRouter();
@@ -56,8 +57,11 @@ function NavBar({ searchText, setSearchText }) {
           width={120}
           height={120}
           alt="Netflix Logo"
-          className="max-md:w-[120px] max-md:h-[120px] max-sm:w-[90px] max-sm:h-[90px]"
+          className="max-md:w-[120px] max-md:h-[120px] max-sm:w-[90px] max-sm:h-[90px] cursor-pointer"
           priority={true}
+          onClick={() => {
+            router.replace("/");
+          }}
         />
         <div className="relative w-[30vw] md:w-[30vw] ">
           <Input
@@ -67,7 +71,15 @@ function NavBar({ searchText, setSearchText }) {
             onChange={(text) => handleInputChange(text.target.value)}
             className="text-black pr-10 w-full h-[30px]"
           />
-          <FiSearch className="absolute right-2 top-1/2 transform -translate-y-1/2 text-black" />
+          {searchText ? (
+            <CircleX
+              onClick={() => setSearchText("")}
+              width={20}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-black cursor-pointer"
+            />
+          ) : (
+            <FiSearch className="absolute right-2 top-1/2 transform -translate-y-1/2 text-black" />
+          )}
         </div>
       </div>
       <div className="block md:hidden">

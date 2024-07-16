@@ -1,10 +1,4 @@
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import SelectLanguage from "./selectLanguage";
 
 const MiniFooter = () => {
   return (
@@ -66,15 +60,7 @@ const MiniFooter = () => {
           </div>
         </div>
         <div className="mt-8">
-          <Select>
-            <SelectTrigger className="w-[130px] h-[36px] bg-transparent text-white border-[1px] hover:border-[1px]">
-              <SelectValue placeholder="English" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="english">English</SelectItem>
-              <SelectItem value="hindi">Hindi</SelectItem>
-            </SelectContent>
-          </Select>
+          <SelectLanguage />
         </div>
         <div className="mt-4 ">Netflix India</div>
       </div>

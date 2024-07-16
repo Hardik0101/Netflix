@@ -13,6 +13,7 @@ export default function Content({
   direction,
   seeMore,
   count,
+  icon,
 }) {
   const [index, setIndex] = useState(false);
   const [data, setData] = useState([]);
@@ -73,7 +74,7 @@ export default function Content({
               >
                 {title}
               </motion.h1>
-              <CiSquareChevRight size={30} />
+              {!icon && <CiSquareChevRight size={30} />}
             </div>
             <Gallery
               items={data}
@@ -91,7 +92,7 @@ export default function Content({
               animate={{ opacity: 0.6 }}
               exit={{ opacity: 0 }}
               key="overlay"
-              className="fixed inset-0 bg-black opacity-60"
+              className="fixed inset-0 bg-black opacity-60 z-50"
               onClick={() => setIndex(false)}
             />
           )}

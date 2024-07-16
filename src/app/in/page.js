@@ -1,12 +1,5 @@
 "use client";
 import Image from "next/image";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import "./styles.css";
 import { Input } from "@/components/ui/input";
 import { CgChevronRight } from "react-icons/cg";
@@ -16,6 +9,7 @@ import Footer from "@/components/component/MainFooter";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Typewriter from "typewriter-effect";
+import SelectLanguage from "@/components/component/selectLanguage";
 
 export default function HomePage() {
   const router = useRouter();
@@ -37,15 +31,7 @@ export default function HomePage() {
                 alt="Netflix Logo"
               />
               <div className="flex flex-row justify-center items-center gap-3">
-                <Select>
-                  <SelectTrigger className="w-[130px] h-[36px] bg-transparent text-white border-[1px] hover:border-[1px]">
-                    <SelectValue placeholder="English" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="english">English</SelectItem>
-                    <SelectItem value="hindi">Hindi</SelectItem>
-                  </SelectContent>
-                </Select>
+                <SelectLanguage />
                 <motion.button
                   initial={{ x: 300 }}
                   animate={{ x: 0 }}
