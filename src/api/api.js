@@ -64,6 +64,7 @@ const moviesAPI = {
         params: {
           with_genres: genreId,
         },
+        timeout: 2000,
       });
       return response.data.results;
     } catch (error) {

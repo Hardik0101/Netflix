@@ -16,7 +16,6 @@ function SelectLanguage() {
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="english">English</SelectItem>
-          <SelectItem value="hindi">Hindi</SelectItem>
         </SelectContent>
       </Select>
     </div>

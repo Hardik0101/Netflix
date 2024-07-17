@@ -1,7 +1,10 @@
+import { addToWatchlist, removeFromWatchlist } from "@/store/WatchlistSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useToast } from "../ui/use-toast";
 import {
   CalendarDays,
   Clapperboard,
@@ -11,10 +14,15 @@ import {
 } from "lucide-react";
 import { fetchMovieTrailers } from "@/api/ApiFetch";
 import { Button } from "../ui/button";
+import { BsBookmarkHeart } from "react-icons/bs";
+import { BsBookmarkHeartFill } from "react-icons/bs";
 
 const SingleImage = ({ item, onClick }) => {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const watchlist = useSelector((state) => state.watchlist.watchlist);
   const [trailerKey, setTrailerKey] = useState("");
+  const { toast } = useToast();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,6 +42,16 @@ const SingleImage = ({ item, onClick }) => {
     fetchData();
   }, [item.id]);
 
+  const handleMyList = () => {
+    if (myList) {
+      dispatch(removeFromWatchlist(item.id));
+    } else {
+      dispatch(addToWatchlist(item));
+    }
+  };
+
+  const myList = watchlist.some((watchItem) => watchItem.id === item.id);
+
   return (
     <div
       className="fixed inset-0 flex justify-center items-center pointer-events-none text-black z-50 mt-6"
@@ -43,49 +61,75 @@ const SingleImage = ({ item, onClick }) => {
         layoutId={item.id}
         className="rounded-sm w-[90vw] md:w-[70vw] lg:w-[50vw]  bg-white p-5 shadow-lg pointer-events-auto  max-sm:p-3"
       >
-        <div className="flex flex-col md:flex-row justify-start items-center ">
-          <Image
-            src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-            priority={true}
-            alt={item.title}
-            width={200}
-            height={300}
-            className="w-[20vw] md:w-[14vw] h-[24vh] object-contain rounded md:mb-0 max-sm:h-[16vh] max-md:h-[20vh]"
-          />
-          <div className="text-center md:text-left ">
-            <h1 className="text-2xl font-semibold mb-3 tracking-wide max-sm:text-sm max-md:text-lg max-sm:mb-0 max-md:mb-0">
-              {item.title}
-            </h1>
-            <div className="flex flex-row items-center gap-x-1 ">
-              <CalendarDays
-                strokeWidth={2}
-                className="max-sm:w-[18px] max-md:w-[20px]"
-              />
-              <p className="text-sm max-sm:text-[12px] max-md:text-[12px]">
-                {item.release_date}
+        <div className="flex  justify-between ">
+          <div className="flex flex-col md:flex-row items-center ">
+            <Image
+              src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+              priority={true}
+              alt={item.title}
+              width={200}
+              height={300}
+              className="w-[20vw] md:w-[14vw] h-[24vh] object-contain rounded md:mb-0 max-sm:h-[16vh] max-md:h-[20vh]"
+            />
+            <div className="text-center md:text-left ">
+              <h1 className="text-2xl font-semibold mb-3 tracking-wide max-sm:text-sm max-md:text-lg max-sm:mb-0 max-md:mb-0">
+                {item.title}
+              </h1>
+              <div className="flex flex-row items-center gap-x-1 ">
+                <CalendarDays
+                  strokeWidth={2}
+                  className="max-sm:w-[18px] max-md:w-[20px]"
+                />
+                <p className="text-sm max-sm:text-[12px] max-md:text-[12px]">
+                  {item.release_date}
+                </p>
+              </div>
+              <div className="flex flex-row items-center gap-x-1 mt-2 max-sm:mt-0 max-md:mt-0">
+                <Clapperboard
+                  strokeWidth={2}
+                  className="max-sm:w-[18px] max-md:w-[20px]"
+                />
+                <p className="text-sm max-sm:text-[12px] max-md:text-[12px]">
+                  {item.vote_average.toFixed(1)} / 10
+                </p>
+              </div>
+              <div className="flex flex-row items-center gap-x-1 mt-2  max-sm:mt-0 max-md:mt-0">
+                <Globe
+                  strokeWidth={2}
+                  className="max-sm:w-[18px] max-md:w-[20px]"
+                />
+                <p className="max-sm:text-[12px] max-md:text-[12px]">
+                  {item.original_language === "en" ? "English" : "Hindi"}
+                </p>
+              </div>
+              <p className="mt-2  max-sm:mt-0 max-md:mt-0 p-[2px] rounded bg-gray-300 w-fit max-sm:text-[12px] max-md:text-[12px]">
+                U/A {item.adult === true ? "18+" : "13+"}
               </p>
             </div>
-            <div className="flex flex-row items-center gap-x-1 mt-2 max-sm:mt-0 max-md:mt-0">
-              <Clapperboard
-                strokeWidth={2}
-                className="max-sm:w-[18px] max-md:w-[20px]"
+          </div>
+          <div className="flex ml-2 self-start right-0">
+            {myList ? (
+              <BsBookmarkHeartFill
+                className="cursor-pointer"
+                size={40}
+                color="red"
+                onClick={() => {
+                  handleMyList();
+                }}
               />
-              <p className="text-sm max-sm:text-[12px] max-md:text-[12px]">
-                {item.vote_average.toFixed(1)} / 10
-              </p>
-            </div>
-            <div className="flex flex-row items-center gap-x-1 mt-2  max-sm:mt-0 max-md:mt-0">
-              <Globe
-                strokeWidth={2}
-                className="max-sm:w-[18px] max-md:w-[20px]"
+            ) : (
+              <BsBookmarkHeart
+                size={40}
+                className="cursor-pointer"
+                onClick={() => {
+                  toast({
+                    title: "Watch Your MY List",
+                    description: "There was a problem with your request.",
+                  });
+                  handleMyList();
+                }}
               />
-              <p className="max-sm:text-[12px] max-md:text-[12px]">
-                {item.original_language === "en" ? "English" : "Hindi"}
-              </p>
-            </div>
-            <p className="mt-2  max-sm:mt-0 max-md:mt-0 p-[2px] rounded bg-gray-300 w-fit max-sm:text-[12px] max-md:text-[12px]">
-              U/A {item.adult === true ? "18+" : "13+"}
-            </p>
+            )}
           </div>
         </div>
         <div className="mt-2">

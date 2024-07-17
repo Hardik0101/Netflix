@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Typewriter from "typewriter-effect";
 import SelectLanguage from "@/components/component/selectLanguage";
+import { Button } from "@/components/ui/button";
 
 export default function HomePage() {
   const router = useRouter();
@@ -21,16 +22,20 @@ export default function HomePage() {
   return (
     <>
       <div className="bg-black">
-        <div className="main_bg w-[100vw]">
+        <div className="main_bg w-full">
           <div className="bg-black/70">
-            <div className="flex flex-row justify-between items-center px-36">
+            <div className="flex flex-col md:flex-row justify-between items-center px-8 md:px-36 py-4 md:py-0">
               <Image
                 src="/assets/image/Netflix_Logo.png"
-                width={200}
-                height={200}
+                width={150}
+                height={150}
                 alt="Netflix Logo"
+                className="w-32 md:w-48 cursor-pointer"
+                onClick={() => {
+                  router.refresh();
+                }}
               />
-              <div className="flex flex-row justify-center items-center gap-3">
+              <div className="flex flex-row justify-center items-center gap-3 mt-4 md:mt-0">
                 <SelectLanguage />
                 <motion.button
                   initial={{ x: 300 }}
@@ -47,8 +52,8 @@ export default function HomePage() {
                 </motion.button>
               </div>
             </div>
-            <div className="flex justify-center items-center flex-col h-[80vh] w-full">
-              <div className="text-5xl text-white font-bold">
+            <div className="flex justify-center items-center flex-col h-[60vh] md:h-[80vh] w-full px-4 md:px-0">
+              <div className="text-3xl md:text-5xl text-white font-bold text-center">
                 <Typewriter
                   onInit={(typewriter) => {
                     typewriter
@@ -58,34 +63,31 @@ export default function HomePage() {
                   }}
                 />
               </div>
-              <h2 className="text-xl text-white mt-4">
+              <h2 className="text-lg md:text-xl text-white mt-4 text-center">
                 Watch anywhere. Cancel anytime.
               </h2>
-              <h1 className="text-xl text-white mt-4">
+              <h1 className="text-lg md:text-xl text-white mt-4 text-center">
                 Ready to watch? Enter your email to create or restart your
                 membership.
               </h1>
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                className="flex items-center space-x-2 w-[40vw] mt-3"
-              >
+              <div className="flex flex-col md:flex-row items-center space-x-0 md:space-x-2 w-full md:w-[36vw] mt-3">
                 <Input
                   type="email"
-                  className="bg-black/60 border-[1px] h-[50px] text-white rounded-sm border-gray-600 hover:border-[1px] hover:border-gray-300"
+                  className="bg-black/60 border-[1px]  text-white rounded-sm border-gray-600 hover:border-[1px] hover:border-gray-300 w-full "
                   placeholder="Email address"
                 />
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                <Button
                   onClick={handleClick}
-                  className="h-[50px] w-[20vw] bg-[#e50914] font-extrabold text-2xl hover:bg-red-700 rounded-md px-3 text-white flex flex-row items-center"
+                  className="md:w-[16vw] bg-[#e50914] font-extrabold text-lg md:text-xl hover:bg-red-700 rounded-md px-3 text-white flex flex-row items-center justify-center md:justify-start mt-4 md:mt-0"
                 >
-                  Get Started <CgChevronRight width={30} height={30} />
-                </motion.button>
-              </motion.div>
+                  Get Started{" "}
+                  <CgChevronRight className="ml-2" width={30} height={30} />
+                </Button>
+              </div>
             </div>
           </div>
         </div>
+
         <ImageCard
           rightImage
           image={

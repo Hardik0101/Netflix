@@ -51,10 +51,14 @@ export default function Content({
             <div className="px-4 my-3">
               <Skeleton width={"10%"} />
             </div>
-            <div className="flex flex-row gap-x-3 overflow-x-auto whitespace-nowrap px-4 ">
+            <div
+              className={`flex ${
+                direction === "vertical" ? "flex-wrap" : "flex-row"
+              } gap-x-3 overflow-x-auto whitespace-nowrap px-4`}
+            >
               {array.map((index) => (
                 <div className="flex flex-col" key={index}>
-                  <Skeleton height={280} width={200} />
+                  <Skeleton height={280} width={190} />
                   <Skeleton />
                 </div>
               ))}
@@ -100,7 +104,7 @@ export default function Content({
             <SingleImage
               key="image"
               item={data[index]}
-              onClick={() => setIndex(false)}
+              // onClick={() => setIndex(false)}
             />
           )}
         </AnimatePresence>

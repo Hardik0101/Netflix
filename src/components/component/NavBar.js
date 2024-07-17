@@ -3,7 +3,7 @@ import { Input } from "../ui/input";
 import { FiSearch } from "react-icons/fi";
 import Image from "next/image";
 import { IoHome } from "react-icons/io5";
-import { GrSettingsOption } from "react-icons/gr";
+
 import { FaRegCircleUser } from "react-icons/fa6";
 import { Button } from "../ui/button";
 import {
@@ -39,7 +39,7 @@ import {
 } from "@/components/ui/sheet";
 import { Label } from "../ui/label";
 import { HiMenu } from "react-icons/hi";
-import { CircleX } from "lucide-react";
+import { FolderHeart, CircleX } from "lucide-react";
 
 function NavBar({ searchText, setSearchText }) {
   const router = useRouter();
@@ -113,7 +113,6 @@ function NavBar({ searchText, setSearchText }) {
                     </DialogDescription>
                   </DialogHeader>
                   <div>
-                    {/* Profile details */}
                     <form className="flex flex-col gap-y-2 mt-4">
                       <Label className="text-black">Email address</Label>
                       <Input
@@ -146,8 +145,13 @@ function NavBar({ searchText, setSearchText }) {
                   </div>
                 </DialogContent>
               </Dialog>
-              <div className="flex flex-row gap-x-1 items-center rounded-sm p-1 hover:bg-red-200 cursor-pointer">
-                <GrSettingsOption color="black" size={16} />
+              <div
+                className="flex flex-row gap-x-1 items-center rounded-sm p-1 hover:bg-red-200 cursor-pointer"
+                onClick={() => {
+                  router.push("/mylist");
+                }}
+              >
+                <FolderHeart color="black" size={16} />
                 <h1>Settings</h1>
               </div>
               <AlertDialog>
@@ -253,13 +257,17 @@ function NavBar({ searchText, setSearchText }) {
             </SheetContent>
           </Sheet>
         </li>
-        <li className="p-1 md:p-2 rounded-full hover:bg-white cursor-pointer">
-          <GrSettingsOption
+        <li
+          className="p-1 md:p-2 rounded-full hover:bg-white cursor-pointer"
+          onClick={() => {
+            router.push("/mylist");
+          }}
+        >
+          <FolderHeart
             color="black"
             size={30}
             className="max-sm:hidden max-md:hidden"
           />
-          <h1 className="md:hidden">Settings</h1>
         </li>
         <li className="p-1 md:p-2">
           <AlertDialog>
