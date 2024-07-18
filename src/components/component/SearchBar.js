@@ -42,7 +42,7 @@ function SearchBar({ searchText }) {
   return (
     <LayoutGroup>
       <motion.div
-        className="bg-red-400 w-[30vw] max-h-[80vh] flex flex-col overflow-y-auto whitespace-nowrap rounded-sm p-2 z-50 fixed ml-40 max-sm:mx-13 max-md:ml-20 max-sm:w-[60vw] max-md:w-[50vw]"
+        className="bg-red-400 w-[30vw] max-h-[80vh] flex flex-col overflow-y-auto whitespace-nowrap  rounded-sm p-2 z-50 fixed ml-40 max-sm:mx-13 max-md:ml-20 max-sm:w-[60vw] max-md:w-[50vw]"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -52,7 +52,8 @@ function SearchBar({ searchText }) {
         {!isSearching && searchResults.length > 0 && (
           <div className="p-2 cursor-pointer">
             {searchResults.map((result) => (
-              <div
+              <motion.div
+                whileHover={{ zoom: 1.08 }}
                 key={result.id}
                 className="flex flex-row items-center gap-x-2 mb-2 w-full"
                 onClick={() => setSelectedImage(result)}
@@ -68,7 +69,7 @@ function SearchBar({ searchText }) {
                 <h1 className="text-black text-sm max-sm:text-[10px] max-md:text-[12px] w-[60%] whitespace-normal">
                   {result.title}
                 </h1>
-              </div>
+              </motion.div>
             ))}
           </div>
         )}

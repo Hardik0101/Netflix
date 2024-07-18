@@ -15,28 +15,6 @@ import NavBar from "@/components/component/NavBar";
 import Footer from "@/components/component/MainFooter";
 
 export default function Home() {
-  useEffect(() => {
-    const fetchMovies = async () => {
-      await Promise.all([
-        getActionMovies(),
-        getComedyMovies(),
-        fetchPopularMovies(),
-        getRomanticMovies(),
-        getThrillerMovies(),
-        fetchUpcomingMovies(),
-      ]);
-    };
-
-    fetchMovies();
-  }, [
-    getActionMovies,
-    getComedyMovies,
-    fetchPopularMovies,
-    getRomanticMovies,
-    getThrillerMovies,
-    fetchUpcomingMovies,
-  ]);
-
   const [searchText, setSearchText] = useState("");
 
   return (

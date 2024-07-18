@@ -17,7 +17,11 @@ const Watchlist = () => {
       <NavBar searchText={searchText} setSearchText={setSearchText} />
       {searchText.length > 0 && <SearchBar searchText={searchText} />}
       <h2 className="text-2xl font-bold mb-4 p-4">My Watchlist</h2>
-      <div className="flex w-full flex-wrap">
+      <div
+        className={`flex w-full flex-wrap ${
+          watchlist.length === 0 && "justify-center items-center h-[50vh]"
+        }`}
+      >
         {watchlist.length > 0 ? (
           <LayoutGroup>
             <Gallery
@@ -44,9 +48,7 @@ const Watchlist = () => {
             </AnimatePresence>
           </LayoutGroup>
         ) : (
-          <h1 className="text-lg flex justify-center items-center">
-            Your watchlist is empty.
-          </h1>
+          <h1 className="text-xl">Your watchlist is empty.</h1>
         )}
       </div>
     </div>

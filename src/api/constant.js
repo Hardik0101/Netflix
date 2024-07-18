@@ -7,4 +7,5 @@ export const apiEndpoint = {
   MOVIE_TRAILERS: "movie/movie_id/videos",
   MOVIE_CAST: "movie/movie_id/credits",
   DISCOVER_MOVIE: "discover/movie",
+  RECOMMENDATIONS: "movie/movie_id/recommendations",
 };

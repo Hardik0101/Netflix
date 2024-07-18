@@ -58,6 +58,18 @@ const moviesAPI = {
       throw error;
     }
   },
+
+  async getRecommendationMovies(id) {
+    try {
+      const response = await axiosInstance.get(
+        apiEndpoint.RECOMMENDATIONS.replace("movie_id", id)
+      );
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
   async getMoviesByGenre(genreId) {
     try {
       const response = await axiosInstance.get(apiEndpoint.DISCOVER_MOVIE, {

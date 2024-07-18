@@ -36,6 +36,15 @@ export const fetchMovieDetails = async (id) => {
   }
 };
 
+export const fetchRecommendation = async (id) => {
+  try {
+    const moviesDetails = await moviesAPI.getRecommendationMovies(id);
+    return moviesDetails;
+  } catch (error) {
+    console.error("Error fetching Details movies:", error);
+  }
+};
+
 export const fetchMovieCast = async (id) => {
   try {
     const moviesCast = await moviesAPI.getMoviesCast(id);
