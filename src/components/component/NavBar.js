@@ -25,7 +25,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -49,6 +50,7 @@ function NavBar({ searchText, setSearchText }) {
     setSearchText(text);
   };
 
+  const pathname = usePathname();
   return (
     <div className="flex z-50 top-0 px-4  flex-row justify-between items-center fixed w-full bg-[#E50914] h-[9%]">
       <div className=" flex flex-row gap-x-6 items-center ">
@@ -152,7 +154,7 @@ function NavBar({ searchText, setSearchText }) {
                 }}
               >
                 <FolderHeart color="black" size={16} />
-                <h1>Settings</h1>
+                <h1>My List</h1>
               </div>
               <AlertDialog>
                 <AlertDialogTrigger asChild>
@@ -188,7 +190,11 @@ function NavBar({ searchText, setSearchText }) {
       <ul
         className={`max-sm:hidden max-md:hidden md:flex flex-row items-center gap-x-2 md:gap-x-3`}
       >
-        <li className="p-1 md:p-2 rounded-full hover:bg-white cursor-pointer">
+        <li
+          className={`p-1 md:p-2 rounded-full ${
+            pathname === "/" ? "bg-white" : "hover:bg-white"
+          } cursor-pointer`}
+        >
           <Link href={"/"}>
             <IoHome
               color="black"
@@ -197,7 +203,7 @@ function NavBar({ searchText, setSearchText }) {
             />
           </Link>
         </li>
-        <li className="p-1 md:p-1 rounded-full hover:bg-white cursor-pointer">
+        <li className="p-1 md:p-2 rounded-full hover:bg-white cursor-pointer">
           <Sheet>
             <SheetTrigger asChild>
               <FaRegCircleUser
@@ -258,7 +264,9 @@ function NavBar({ searchText, setSearchText }) {
           </Sheet>
         </li>
         <li
-          className="p-1 md:p-2 rounded-full hover:bg-white cursor-pointer"
+          className={`p-1 md:p-2 rounded-full  ${
+            pathname === "/mylist" ? "bg-white" : "hover:bg-white"
+          } cursor-pointer`}
           onClick={() => {
             router.push("/mylist");
           }}
