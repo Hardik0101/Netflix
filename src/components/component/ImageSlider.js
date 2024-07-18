@@ -29,7 +29,7 @@ function ImageSlider({ functions }) {
   }));
 
   return (
-    <div className="flex justify-center w-screen h-[74vh] max-sm:h-[26vh] max-md:h-[50vh]">
+    <div className="flex justify-center w-screen h-[74vh] max-sm:h-[26vh] max-md:h-[50vh] mt-2">
       {loading ? (
         <div>
           <Skeleton height={540} width={1000} />

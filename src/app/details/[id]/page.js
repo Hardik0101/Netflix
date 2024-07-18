@@ -1,18 +1,21 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { fetchMovieCast, fetchMovieDetails } from "@/api/ApiFetch";
+import { useEffect, useState } from "react";
+import {
+  fetchMovieCast,
+  fetchMovieDetails,
+  fetchRecommendation,
+} from "@/api/ApiFetch";
 import Image from "next/image";
 import MiniFooter from "@/components/component/MiniFooter";
-import NavBar from "@/components/component/NavBar";
-import SearchBar from "@/components/component/SearchBar";
+import { Gallery } from "@/components/component/Gallery";
 
 const MovieDetails = ({ params }) => {
   const [details, setDetails] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [cast, setCast] = useState([]);
   const [departmentCast, setDepartmentCast] = useState({});
-  const [searchText, setSearchText] = useState("");
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -54,6 +57,18 @@ const MovieDetails = ({ params }) => {
     fetchDetails();
   }, [params.id]);
 
+  useEffect(() => {
+    const fetchReMovies = async () => {
+      try {
+        const response = await fetchRecommendation(params.id);
+        setData(response.results.slice(0, 9));
+      } catch (error) {
+        console.error("Error fetching recommended movies: ", error);
+      }
+    };
+    fetchReMovies();
+  }, [params.id]);
+
   if (isLoading) {
     return <div className="bg-black text-white">Loading...</div>;
   }
@@ -64,9 +79,7 @@ const MovieDetails = ({ params }) => {
 
   return (
     <>
-      <div className="w-full bg-black text-white pt-[9vh]">
-        <NavBar searchText={searchText} setSearchText={setSearchText} />
-        {searchText.length > 0 && <SearchBar searchText={searchText} />}
+      <div>
         <Image
           src={`https://image.tmdb.org/t/p/w500${details.poster_path}`}
           priority={true}
@@ -117,6 +130,15 @@ const MovieDetails = ({ params }) => {
           </div>
         ))}
       </div>
+
+      {data.length > 0 && (
+        <Gallery
+          items={data}
+          seeMore={true}
+          title_name={"Recommendation"}
+          direction="horizontal"
+        />
+      )}
       <hr className="bg-[#232323] h-2 border-0" />
       <MiniFooter />
     </>
