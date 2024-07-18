@@ -3,7 +3,7 @@ import { Input } from "../ui/input";
 import { FiSearch } from "react-icons/fi";
 import Image from "next/image";
 import { IoHome } from "react-icons/io5";
-import { GrSettingsOption } from "react-icons/gr";
+
 import { FaRegCircleUser } from "react-icons/fa6";
 import { Button } from "../ui/button";
 import {
@@ -25,7 +25,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -39,6 +40,7 @@ import {
 } from "@/components/ui/sheet";
 import { Label } from "../ui/label";
 import { HiMenu } from "react-icons/hi";
+import { FolderHeart, CircleX } from "lucide-react";
 
 function NavBar({ searchText, setSearchText }) {
   const router = useRouter();
@@ -48,6 +50,7 @@ function NavBar({ searchText, setSearchText }) {
     setSearchText(text);
   };
 
+  const pathname = usePathname();
   return (
     <div className="flex z-50 top-0 px-4  flex-row justify-between items-center fixed w-full bg-[#E50914] h-[9%]">
       <div className=" flex flex-row gap-x-6 items-center ">
@@ -56,8 +59,11 @@ function NavBar({ searchText, setSearchText }) {
           width={120}
           height={120}
           alt="Netflix Logo"
-          className="max-md:w-[120px] max-md:h-[120px] max-sm:w-[90px] max-sm:h-[90px]"
+          className="max-md:w-[120px] max-md:h-[120px] max-sm:w-[90px] max-sm:h-[90px] cursor-pointer"
           priority={true}
+          onClick={() => {
+            router.replace("/");
+          }}
         />
         <div className="relative w-[30vw] md:w-[30vw] ">
           <Input
@@ -67,7 +73,15 @@ function NavBar({ searchText, setSearchText }) {
             onChange={(text) => handleInputChange(text.target.value)}
             className="text-black pr-10 w-full h-[30px]"
           />
-          <FiSearch className="absolute right-2 top-1/2 transform -translate-y-1/2 text-black" />
+          {searchText ? (
+            <CircleX
+              onClick={() => setSearchText("")}
+              width={20}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-black cursor-pointer"
+            />
+          ) : (
+            <FiSearch className="absolute right-2 top-1/2 transform -translate-y-1/2 text-black" />
+          )}
         </div>
       </div>
       <div className="block md:hidden">
@@ -101,7 +115,6 @@ function NavBar({ searchText, setSearchText }) {
                     </DialogDescription>
                   </DialogHeader>
                   <div>
-                    {/* Profile details */}
                     <form className="flex flex-col gap-y-2 mt-4">
                       <Label className="text-black">Email address</Label>
                       <Input
@@ -134,9 +147,14 @@ function NavBar({ searchText, setSearchText }) {
                   </div>
                 </DialogContent>
               </Dialog>
-              <div className="flex flex-row gap-x-1 items-center rounded-sm p-1 hover:bg-red-200 cursor-pointer">
-                <GrSettingsOption color="black" size={16} />
-                <h1>Settings</h1>
+              <div
+                className="flex flex-row gap-x-1 items-center rounded-sm p-1 hover:bg-red-200 cursor-pointer"
+                onClick={() => {
+                  router.push("/mylist");
+                }}
+              >
+                <FolderHeart color="black" size={16} />
+                <h1>My List</h1>
               </div>
               <AlertDialog>
                 <AlertDialogTrigger asChild>
@@ -172,7 +190,11 @@ function NavBar({ searchText, setSearchText }) {
       <ul
         className={`max-sm:hidden max-md:hidden md:flex flex-row items-center gap-x-2 md:gap-x-3`}
       >
-        <li className="p-1 md:p-2 rounded-full hover:bg-white cursor-pointer">
+        <li
+          className={`p-1 md:p-2 rounded-full ${
+            pathname === "/" ? "bg-white" : "hover:bg-white"
+          } cursor-pointer`}
+        >
           <Link href={"/"}>
             <IoHome
               color="black"
@@ -181,7 +203,7 @@ function NavBar({ searchText, setSearchText }) {
             />
           </Link>
         </li>
-        <li className="p-1 md:p-1 rounded-full hover:bg-white cursor-pointer">
+        <li className="p-1 md:p-2 rounded-full hover:bg-white cursor-pointer">
           <Sheet>
             <SheetTrigger asChild>
               <FaRegCircleUser
@@ -241,13 +263,19 @@ function NavBar({ searchText, setSearchText }) {
             </SheetContent>
           </Sheet>
         </li>
-        <li className="p-1 md:p-2 rounded-full hover:bg-white cursor-pointer">
-          <GrSettingsOption
+        <li
+          className={`p-1 md:p-2 rounded-full  ${
+            pathname === "/mylist" ? "bg-white" : "hover:bg-white"
+          } cursor-pointer`}
+          onClick={() => {
+            router.push("/mylist");
+          }}
+        >
+          <FolderHeart
             color="black"
             size={30}
             className="max-sm:hidden max-md:hidden"
           />
-          <h1 className="md:hidden">Settings</h1>
         </li>
         <li className="p-1 md:p-2">
           <AlertDialog>

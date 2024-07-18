@@ -4,14 +4,15 @@ import { useEffect, useState } from "react";
 import {
   getActionMovies,
   getComedyMovies,
-  getPopularMovie,
+  fetchPopularMovies,
   getRomanticMovies,
   getThrillerMovies,
-  getUpcomingMovie,
+  fetchUpcomingMovies,
 } from "@/api/ApiFetch";
 import ImageSlider from "@/components/component/ImageSlider";
 import SearchBar from "@/components/component/SearchBar";
 import NavBar from "@/components/component/NavBar";
+import Footer from "@/components/component/MainFooter";
 
 export default function Home() {
   useEffect(() => {
@@ -19,10 +20,10 @@ export default function Home() {
       await Promise.all([
         getActionMovies(),
         getComedyMovies(),
-        getPopularMovie(),
+        fetchPopularMovies(),
         getRomanticMovies(),
         getThrillerMovies(),
-        getUpcomingMovie(),
+        fetchUpcomingMovies(),
       ]);
     };
 
@@ -30,13 +31,11 @@ export default function Home() {
   }, [
     getActionMovies,
     getComedyMovies,
-    getPopularMovie,
+    fetchPopularMovies,
     getRomanticMovies,
     getThrillerMovies,
-    getUpcomingMovie,
+    fetchUpcomingMovies,
   ]);
-
-  const data = Array(10).fill(1);
 
   const [searchText, setSearchText] = useState("");
 
@@ -48,14 +47,14 @@ export default function Home() {
         <ImageSlider functions={getActionMovies} />
         <Content
           title={"New Upcoming Movies"}
-          functions={getUpcomingMovie}
+          functions={fetchUpcomingMovies}
           direction={"horizontal"}
           seeMore
           count={10}
         />
         <Content
           title={"Popular Movies"}
-          functions={getPopularMovie}
+          functions={fetchPopularMovies}
           direction={"horizontal"}
           seeMore
           count={10}
@@ -89,6 +88,8 @@ export default function Home() {
           count={10}
         />
       </div>
+      <hr className="bg-[#232323] h-2 border-0" />
+      <Footer />
     </>
   );
 }

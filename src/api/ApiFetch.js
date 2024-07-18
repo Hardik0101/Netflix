@@ -1,71 +1,62 @@
-import axios from "axios";
+import moviesAPI from "./api";
 
-const API_KEY = "df4e888c43bec24422bfa0f9a44e5747";
-const API_BASE_URL = "https://api.themoviedb.org/3/";
-const API_KEY_POPULAR_MOVIE = `${API_BASE_URL}movie/popular?api_key=${API_KEY}`;
-const API_M_UPCOMING = `${API_BASE_URL}movie/upcoming?api_key=${API_KEY}`;
-const API_MOVIES_DETAILS = `${API_BASE_URL}movie/:id?api_key=${API_KEY}`;
-const API_MOVIES_TRAILERS = `${API_BASE_URL}movie/movie_id/videos?api_key=${API_KEY}`;
-
-export async function getPopularMovie() {
+export const fetchPopularMovies = async () => {
   try {
-    const response = await axios.get(API_KEY_POPULAR_MOVIE);
-    return response.data.results;
+    const popularMovies = await moviesAPI.getPopularMovie();
+    return popularMovies;
   } catch (error) {
-    console.log(error);
-    throw error;
+    console.error("Error fetching popular movies:", error);
   }
-}
+};
 
-export async function getUpcomingMovie() {
+export const fetchUpcomingMovies = async () => {
   try {
-    const response = await axios.get(API_M_UPCOMING);
-    return response.data.results;
+    const upcomingMovies = await moviesAPI.getUpcomingMovie();
+    return upcomingMovies;
   } catch (error) {
-    console.log(error);
-    throw error;
+    console.error("Error fetching upcoming movies:", error);
   }
-}
+};
 
-export async function getMoviesTrailers(id) {
+export const fetchMovieTrailers = async (id) => {
   try {
-    const response = await axios.get(
-      API_MOVIES_TRAILERS.replace("movie_id", id)
-    );
-    return response.data;
+    const moviesTrailers = await moviesAPI.getMoviesTrailers(id);
+    return moviesTrailers;
   } catch (error) {
-    console.log(error);
-    throw error;
+    console.error("Error fetching trailers movies:", error);
   }
-}
+};
 
-export async function getMoviesByGenre(genreId) {
+export const fetchMovieDetails = async (id) => {
   try {
-    const response = await axios.get(`${API_BASE_URL}discover/movie`, {
-      params: {
-        api_key: API_KEY,
-        with_genres: genreId,
-      },
-    });
-    return response.data.results;
+    const moviesDetails = await moviesAPI.getMoviesDetails(id);
+    return moviesDetails;
   } catch (error) {
-    console.error(`Error fetching movies for genre ${genreId}:`, error);
-    throw error;
+    console.error("Error fetching Details movies:", error);
   }
-}
+};
 
-export async function getComedyMovies() {
-  return getMoviesByGenre(35);
-}
+export const fetchMovieCast = async (id) => {
+  try {
+    const moviesCast = await moviesAPI.getMoviesCast(id);
+    return moviesCast;
+  } catch (error) {
+    console.error("Error fetching Cast movies:", error);
+  }
+};
 
-export async function getRomanticMovies() {
-  return getMoviesByGenre(10749);
-}
+export const getComedyMovies = async () => {
+  return await moviesAPI.getMoviesByGenre(35);
+};
 
-export async function getThrillerMovies() {
-  return getMoviesByGenre(53);
-}
+export const getRomanticMovies = async () => {
+  return moviesAPI.getMoviesByGenre(10749);
+};
 
-export async function getActionMovies() {
-  return getMoviesByGenre(28);
-}
+export const getThrillerMovies = async () => {
+  return moviesAPI.getMoviesByGenre(53);
+};
+
+export const getActionMovies = async () => {
+  return moviesAPI.getMoviesByGenre(28);
+};
