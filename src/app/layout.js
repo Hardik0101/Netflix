@@ -26,8 +26,10 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Provider store={store}>
           <div
-            className={`w-full bg-black text-white pt-[9vh] ${
-              (pathname === "/in" || pathname === "/in/login") && "pt-[0vh]"
+            className={`w-full bg-black text-white ${
+              pathname === "/in" || pathname === "/in/login"
+                ? "pt-[0vh]"
+                : "pt-[9vh]"
             }`}
           >
             <div
