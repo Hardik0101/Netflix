@@ -10,18 +10,12 @@ import {
   fetchUpcomingMovies,
 } from "@/api/ApiFetch";
 import ImageSlider from "@/components/component/ImageSlider";
-import SearchBar from "@/components/component/SearchBar";
-import NavBar from "@/components/component/NavBar";
 import Footer from "@/components/component/MainFooter";
 
 export default function Home() {
-  const [searchText, setSearchText] = useState("");
-
   return (
     <>
-      <div className="w-full bg-black text-white pt-[9vh]">
-        <NavBar searchText={searchText} setSearchText={setSearchText} />
-        {searchText.length > 0 && <SearchBar searchText={searchText} />}
+      <div>
         <ImageSlider functions={getActionMovies} />
         <Content
           title={"New Upcoming Movies"}

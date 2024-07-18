@@ -9,12 +9,9 @@ import {
 } from "@/api/ApiFetch";
 import Content from "@/components/component/Content";
 import MiniFooter from "@/components/component/MiniFooter";
-import NavBar from "@/components/component/NavBar";
-import SearchBar from "@/components/component/SearchBar";
 import { useState, useEffect } from "react";
 
 const AllMovies = ({ params }) => {
-  const [searchText, setSearchText] = useState("");
   const [fetchFunction, setFetchFunction] = useState(fetchPopularMovies);
   const decodedTitle = decodeURIComponent(params.title_name);
 
@@ -45,9 +42,7 @@ const AllMovies = ({ params }) => {
   }, [decodedTitle]);
 
   return (
-    <div className="w-full bg-black text-white pt-[9vh]">
-      <NavBar searchText={searchText} setSearchText={setSearchText} />
-      {searchText.length > 0 && <SearchBar searchText={searchText} />}
+    <div>
       <Content
         title={decodedTitle}
         functions={fetchFunction}

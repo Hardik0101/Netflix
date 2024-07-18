@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   fetchMovieCast,
   fetchMovieDetails,
@@ -8,8 +8,6 @@ import {
 } from "@/api/ApiFetch";
 import Image from "next/image";
 import MiniFooter from "@/components/component/MiniFooter";
-import NavBar from "@/components/component/NavBar";
-import SearchBar from "@/components/component/SearchBar";
 import { Gallery } from "@/components/component/Gallery";
 
 const MovieDetails = ({ params }) => {
@@ -17,7 +15,6 @@ const MovieDetails = ({ params }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [cast, setCast] = useState([]);
   const [departmentCast, setDepartmentCast] = useState({});
-  const [searchText, setSearchText] = useState("");
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -82,9 +79,7 @@ const MovieDetails = ({ params }) => {
 
   return (
     <>
-      <div className="w-full bg-black text-white pt-[9vh]">
-        <NavBar searchText={searchText} setSearchText={setSearchText} />
-        {searchText.length > 0 && <SearchBar searchText={searchText} />}
+      <div>
         <Image
           src={`https://image.tmdb.org/t/p/w500${details.poster_path}`}
           priority={true}

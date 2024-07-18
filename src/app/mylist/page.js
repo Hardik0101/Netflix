@@ -4,18 +4,13 @@ import { Gallery } from "@/components/component/Gallery";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { useState } from "react";
 import SingleImage from "@/components/component/SingleImage";
-import NavBar from "@/components/component/NavBar";
-import SearchBar from "@/components/component/SearchBar";
 
 const Watchlist = () => {
   const watchlist = useSelector((state) => state.watchlist.watchlist);
   const [index, setIndex] = useState(false);
-  const [searchText, setSearchText] = useState("");
 
   return (
-    <div className="w-full bg-black text-white pt-[9vh]">
-      <NavBar searchText={searchText} setSearchText={setSearchText} />
-      {searchText.length > 0 && <SearchBar searchText={searchText} />}
+    <div>
       <h2 className="text-2xl font-bold mb-4 p-4">My Watchlist</h2>
       <div
         className={`flex w-full flex-wrap ${

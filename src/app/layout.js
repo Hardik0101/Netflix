@@ -6,10 +6,17 @@ import { Toaster } from "@/components/ui/toaster";
 import { Provider } from "react-redux";
 import store from "@/store/Index";
 import Head from "next/head";
+import NavBar from "@/components/component/NavBar";
+import SearchBar from "@/components/component/SearchBar";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
+  const [searchText, setSearchText] = useState("");
+
+  const pathname = usePathname();
   return (
     <html lang="en" className="bg-black">
       <Head>
@@ -18,8 +25,22 @@ export default function RootLayout({ children }) {
       </Head>
       <body className={inter.className}>
         <Provider store={store}>
-          {children}
-          <Toaster />
+          <div
+            className={`w-full bg-black text-white pt-[9vh] ${
+              (pathname === "/in" || pathname === "/in/login") && "pt-[0vh]"
+            }`}
+          >
+            <div
+              className={`${
+                (pathname === "/in" || pathname === "/in/login") && "hidden "
+              }`}
+            >
+              <NavBar searchText={searchText} setSearchText={setSearchText} />
+              {searchText.length > 0 && <SearchBar searchText={searchText} />}
+            </div>
+            {children}
+            <Toaster />
+          </div>
         </Provider>
       </body>
     </html>
