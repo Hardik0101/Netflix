@@ -12,7 +12,7 @@ import MiniFooter from "@/components/component/MiniFooter";
 import { useState, useEffect } from "react";
 
 const AllMovies = ({ params }) => {
-  const [fetchFunction, setFetchFunction] = useState(fetchPopularMovies);
+  const [fetchFunction, setFetchFunction] = useState(() => fetchPopularMovies);
   const decodedTitle = decodeURIComponent(params.title_name);
 
   useEffect(() => {

@@ -20,27 +20,17 @@ export default function Content({
   const [loading, setLoading] = useState(true);
   const dataRef = useRef([]);
 
-  const fetchData = useCallback(async () => {
-    try {
+  useEffect(() => {
+    const fetchData = async () => {
       setLoading(true);
       const popularData = await functions();
       setData(popularData.slice(0, count));
-      dataRef.current = popularData;
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
       setLoading(false);
-    }
-  }, [functions]);
+    };
 
-  useEffect(() => {
-    if (dataRef.current.length === 0) {
-      fetchData();
-    } else {
-      setData(dataRef.current);
-      setLoading(false);
-    }
-  }, [fetchData]);
+    fetchData();
+  }, []);
+
   const array = Array(10).fill(1);
 
   return (
