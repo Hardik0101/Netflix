@@ -41,6 +41,7 @@ function ImageSlider({ functions }) {
           autoPlay={true}
           infiniteLoop={true}
           showArrows={false}
+          showIndicators={false}
           className=" w-[70vw] h-full"
         >
           {images.map((image, index) => (

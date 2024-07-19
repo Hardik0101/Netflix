@@ -134,7 +134,7 @@ const MovieDetails = ({ params }) => {
       {data.length > 0 && (
         <Gallery
           items={data}
-          seeMore={true}
+          seeMore={false}
           title_name={"Recommendation"}
           direction="horizontal"
         />
