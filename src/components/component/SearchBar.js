@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { motion, LayoutGroup, AnimatePresence } from "framer-motion";
@@ -32,9 +32,8 @@ function SearchBar({ searchText, setSearchText }) {
         setIsSearching(false);
       }
     }, 500),
-    []
+    [setSearchResults, setIsSearching]
   );
-
   useEffect(() => {
     fetchSearchResults(searchText);
   }, [searchText, fetchSearchResults]);

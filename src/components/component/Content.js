@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { motion, LayoutGroup, AnimatePresence } from "framer-motion";
 import { CiSquareChevRight } from "react-icons/ci";
 import Skeleton from "react-loading-skeleton";
@@ -18,7 +18,6 @@ export default function Content({
   const [index, setIndex] = useState(false);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const dataRef = useRef([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +28,7 @@ export default function Content({
     };
 
     fetchData();
-  }, []);
+  }, [functions, count]);
 
   const array = Array(10).fill(1);
 

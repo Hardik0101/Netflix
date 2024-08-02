@@ -22,7 +22,7 @@ function ImageSlider({ functions }) {
       }
     };
     fetchData();
-  }, []);
+  }, [functions]);
 
   const images = data.slice(0, 6).map((item) => ({
     url: `https://image.tmdb.org/t/p/w500${item.backdrop_path}`,

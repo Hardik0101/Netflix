@@ -1,6 +1,5 @@
 "use client";
 import Content from "@/components/component/Content";
-import { useEffect, useState } from "react";
 import {
   getActionMovies,
   getComedyMovies,

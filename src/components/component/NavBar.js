@@ -180,7 +180,7 @@ function NavBar({ searchText, setSearchText }) {
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                 }
-                description={`Make changes to your profile here. Click save when you&apos;re done.`}
+                description={`Make changes to your profile here. Click save when you're done.`}
                 content={
                   <div>
                     <UserForm initialValues={initialValues} />
