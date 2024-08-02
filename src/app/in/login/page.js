@@ -175,7 +175,8 @@ function LoginPage() {
                   </TabsList>
                 </h1>
                 <p className="text-[12px] text-gray-400">
-                  This page is protected by Google reCAPTCHA to ensure you're
+                  This page is protected by Google reCAPTCHA to ensure{" "}
+                  {"you're "}
                   not a bot.{" "}
                   <a href="#" className="text-blue-500 hover:underline">
                     Learn more.

@@ -23,11 +23,11 @@ export function FAQcontent() {
           <AccordionTrigger>What is Netflix?</AccordionTrigger>
           <AccordionContent className="text-2xl">
             Netflix is a streaming service that offers a wide variety of
-            award-winning TV shows, movies, anime, documentaries and more – on
-            thousands of internet-connected devices. You can watch as much as
-            you want, whenever you want, without a single ad – all for one low
-            monthly price. There's always something new to discover, and new TV
-            shows and movies are added every week!
+            award-winning TV shows, movies, anime, documentaries and more {"–"}{" "}
+            on thousands of internet-connected devices. You can watch as much as
+            you want, whenever you want, without a single ad {"–"} all for one
+            low monthly price. {"There's"} always something new to discover, and
+            new TV shows and movies are added every week!
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2" className=" bg-[#2D2D2D] px-6 py-2">
@@ -46,8 +46,8 @@ export function FAQcontent() {
             on any internet-connected device that offers the Netflix app,
             including smart TVs, smartphones, tablets, streaming media players
             and game consoles. You can also download your favourite shows with
-            the iOS or Android app. Use downloads to watch while you're on the
-            go and without an internet connection. Take Netflix with you
+            the iOS or Android app. Use downloads to watch while {"you're "} on
+            the go and without an internet connection. Take Netflix with you
             anywhere.
           </AccordionContent>
         </AccordionItem>
