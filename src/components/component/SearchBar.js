@@ -95,7 +95,7 @@ function SearchBar({ searchText, setSearchText }) {
             <SingleImage
               key="image"
               item={selectedImage}
-              onClick={() => setSelectedImage(false)}
+              // onClick={() => setSelectedImage(false)}
             />
           </>
         )}
