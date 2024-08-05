@@ -97,8 +97,8 @@ function NavBar({ searchText, setSearchText }) {
                   <DialogHeader>
                     <DialogTitle>Edit profile</DialogTitle>
                     <DialogDescription>
-                      Make changes to your profile here. Click save when you're
-                      done.
+                      Make changes to your profile here. Click save when
+                      you&apos;re done.
                     </DialogDescription>
                   </DialogHeader>
                   <div>
@@ -126,7 +126,7 @@ function NavBar({ searchText, setSearchText }) {
                 btnTitle={"Log out"}
                 alertMessage={"Are you absolutely sure?"}
                 alertDescription={
-                  " Are you sure you want to log out? Click 'OK' to confirm and logout, or 'Cancel' to stay logged in."
+                  " Are you sure you want to log out? Click OK to confirm and logout, or Cancel to stay logged in."
                 }
                 confirmBtnTitle={"OK"}
                 cancelBtnTitle={"Cancel"}
@@ -180,9 +180,7 @@ function NavBar({ searchText, setSearchText }) {
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                 }
-                description={
-                  "  Make changes to your profile here. Click save when you're done."
-                }
+                description={`Make changes to your profile here. Click save when you're done.`}
                 content={
                   <div>
                     <UserForm initialValues={initialValues} />
@@ -224,7 +222,7 @@ function NavBar({ searchText, setSearchText }) {
             btnTitle={"Log out"}
             alertMessage={"Are you absolutely sure?"}
             alertDescription={
-              " Are you sure you want to log out? Click 'OK' to confirm and logout, or 'Cancel' to stay logged in."
+              " Are you sure you want to log out? Click OK to confirm and logout, or Cancel to stay logged in."
             }
             confirmBtnTitle={"OK"}
             cancelBtnTitle={"Cancel"}

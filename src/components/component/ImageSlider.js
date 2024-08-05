@@ -22,7 +22,7 @@ function ImageSlider({ functions }) {
       }
     };
     fetchData();
-  }, []);
+  }, [functions]);
 
   const images = data.slice(0, 6).map((item) => ({
     url: `https://image.tmdb.org/t/p/w500${item.backdrop_path}`,
@@ -41,6 +41,7 @@ function ImageSlider({ functions }) {
           autoPlay={true}
           infiniteLoop={true}
           showArrows={false}
+          showIndicators={false}
           className=" w-[70vw] h-full"
         >
           {images.map((image, index) => (

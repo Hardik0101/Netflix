@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { motion, LayoutGroup, AnimatePresence } from "framer-motion";
 import { debounce } from "lodash";
 import SingleImage from "./SingleImage";
 
-function SearchBar({ searchText }) {
+function SearchBar({ searchText, setSearchText }) {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -32,17 +32,22 @@ function SearchBar({ searchText }) {
         setIsSearching(false);
       }
     }, 500),
-    []
+    [setSearchResults, setIsSearching]
   );
-
   useEffect(() => {
     fetchSearchResults(searchText);
   }, [searchText, fetchSearchResults]);
 
   return (
     <LayoutGroup>
+      <div
+        className="w-screen h-screen bg-black/60 z-30 fixed"
+        onClick={() => {
+          setSearchText("");
+        }}
+      />
       <motion.div
-        className="bg-red-400 w-[30vw] max-h-[80vh] flex flex-col overflow-y-auto whitespace-nowrap  rounded-sm p-2 z-50 fixed ml-40 max-sm:mx-13 max-md:ml-20 max-sm:w-[60vw] max-md:w-[50vw]"
+        className="bg-red-400 w-[30vw] max-h-[80vh] flex flex-col overflow-y-auto whitespace-nowrap  rounded-sm p-2 z-50 fixed ml-40 max-sm:mx-13 max-md:ml-20 max-sm:w-[60vw] max-md:w-[50vw] "
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -89,7 +94,7 @@ function SearchBar({ searchText }) {
             <SingleImage
               key="image"
               item={selectedImage}
-              onClick={() => setSelectedImage(false)}
+              // onClick={() => setSelectedImage(false)}
             />
           </>
         )}
